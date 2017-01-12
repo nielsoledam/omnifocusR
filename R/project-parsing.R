@@ -28,7 +28,7 @@ parse_projects <- function(x) {
 
   ns <- xml_ns(x)
 
-  project_nodes <- as_list(xml_find_all(x, "/*/d1:task[d1:project]", ns))
+  project_nodes <- xml_find_all(x, "/*/d1:task[d1:project]", ns)
 
   bind_rows(lapply(project_nodes, parse_project_node))
 }
