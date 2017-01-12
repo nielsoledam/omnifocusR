@@ -57,6 +57,6 @@ tidy_tasks <- function(.data) {
     "task_id", "name", "context_id",
     "project_id", "added", "modified",
     "due", "completed", "start",
-    "flagged"
+    "flagged", "note"
   )
 }
