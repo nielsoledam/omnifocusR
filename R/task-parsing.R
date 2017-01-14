@@ -12,6 +12,11 @@ parse_tasks <- function(x) {
     task_id <- xml_attrs(x)
     context_id <- xml_attr(xml_find_one(x, "d1:context", ns), "idref")
     project_id <- xml_attr(xml_find_one(x, "d1:task", ns), "idref")
+    note <- xml_find_one(x, "d1:note", ns)
+    note <- htmlParse(note, asText = TRUE, encoding = "UTF-8")
+    note <- xpathSApply(note, "//p", xmlValue)
+    note <- gsub("\n      \n          <value key=\"paragraph-alignment\">left\n        ", "", note)
+    note <- paste(note, collapse = "\n")
     node_content <- xml_contents(x)
 
     node_text <- xml_text(node_content)
@@ -22,6 +27,7 @@ parse_tasks <- function(x) {
     temp$task_id <- task_id
     temp$context_id <- context_id
     temp$project_id <- project_id
+    temp$note <- note
     temp
   }
 
