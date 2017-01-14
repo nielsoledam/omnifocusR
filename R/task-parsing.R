@@ -17,6 +17,9 @@ parse_tasks <- function(x) {
     note <- xpathSApply(note, "//p", xmlValue)
     note <- gsub("\n      \n          <value key=\"paragraph-alignment\">left\n        ", "", note)
     note <- paste(note, collapse = "\n")
+    note <- gsub("<.*?>", "", note)
+    note <- gsub("\n      \n          ", "", note)
+    note <- gsub("(\n\\s+)", "\n", note)
     node_content <- xml_contents(x)
 
     node_text <- xml_text(node_content)
